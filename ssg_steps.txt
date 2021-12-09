@@ -1,0 +1,129 @@
+Requirements
+    Python - https://www.python.org/downloads/
+    GH - https://cli.github.com/manual/index
+    Git - https://git-scm.com/downloads
+    Pipenv - [pip install pipenv] https://pipenv.pypa.io/en/latest/install/
+Project Steps
+    open console
+    create directory for project
+        > mkdir {folder_name}
+    open directory in console
+        > cd {folder_name}
+    start tracking this directory
+        > git init
+    start a shell to run and install dependencies
+        > pipenv shell
+    install pelican
+        > pipenv install pelican
+    install markdown
+        > pipenv install markdown
+    install invoke
+        > pipenv install invoke
+    install livereload
+        > pipenv install livereload
+    run Pelican Quickstart
+        > pelican-quickstart
+            > What will be the title of this web site? {website_name}
+            > Who will be the author of this web site? {author_name}
+            > What will be the default language of this web site? [English] {en}
+            > Do you want to specify a URL prefix? e.g., https://example.com (Y/n) {n}
+            > Do you want to enable article pagination? (Y/n) {n}
+            > What is your time zone? [Europe/Rome] America/Denver
+            > Do you want to generate a tasks.py/Makefile to automate generation and publishing? (Y/n) {y}
+            > Do you want to upload your website using FTP? (y/N) {n}
+            > Do you want to upload your website using SSH? (y/N) {n}
+            > Do you want to upload your website using Dropbox? (y/N) {n}
+            > Do you want to upload your website using S3? (y/N) {n}
+            > Do you want to upload your website using Rackspace Cloud Files? (y/N) {n}
+            > Do you want to upload your website using GitHub Pages? (y/N) {n}
+            Done. Your new project is available at [current directory]
+    add markdown file and images directory in content folder
+        > cd content
+        > mkdir images
+        > copy con {filename}.md
+            > title: {title of website}
+            > date: YYYY-MM-DD
+            > category: home
+            > #{a header for the website}
+            > {some text for the website}
+            > {ctl + c} to exit
+        > cd ..
+    check with Pelican
+        > pelican
+            > Done: Processed 1 article, 0 drafts, 0 hidden articles, 0 pages, 0 hidden pages and 0 draft pages in 0.16 seconds.
+    invoke live reload to view webpage
+        > invoke livereload
+            [I 211209 12:54:59 server:335] Serving on http://localhost:8000
+            [12:54:59] INFO     Serving on http://localhost:8000                server.py:335
+            [I 211209 12:54:59 handlers:62] Start watching changes
+            INFO     Start watching changes                                     handlers.py:62
+            [I 211209 12:54:59 handlers:64] Start detecting changes
+            INFO     Start detecting changes                                    handlers.py:64
+            [I 211209 12:54:59 handlers:135] Browser Connected: http://localhost:8000/
+            INFO     Browser Connected: http://localhost:8000/                  handlers.py:135
+            [W 211209 12:54:59 log:91] 404 GET /favicon.ico (::1) 4.00ms
+            WARNING  404 GET /favicon.ico (::1) 4.00ms                          log.py:91
+            [I 211209 12:55:00 handlers:82] Ignore: C:\Users\thomc\.virtualenvs\oily_fish-4An-YCfm\lib\site-packages\pelican\themes\notmyidea/static\fonts\font.css
+            [12:55:00] INFO     Ignore: C:\Users\thomc\.virtualenvs\oily_fish-4An-YCfm\lib\site-packages\pelican\the handlers.py:82
+                                mes\notmyidea/static\fonts\font.css
+            [I 211209 12:55:01 handlers:92] Reload 1 waiters: None
+            [12:55:01] INFO     Reload 1 waiters: None                          handlers.py:92
+        View in web browser
+        > {ctr + c} to end active process
+            [I 211209 12:55:27 server:358] Shutting down...
+            [12:55:27] INFO     Shutting down...                                server.py:358
+    install Pelican noJekyll plugin
+        > pip install minchin.pelican.plugins.nojekyll
+    switch to windowed GUI directory of your project
+        locate and open in code editor: pelicanconf.py
+        add the following code
+            PLUGINS = [
+                # ...
+                'minchin.pelican.plugins.nojekyll',
+                # ...
+            ]
+        and change the SITEURL = ''
+            SITEURL = '.'
+        and add below PATH = 'content'
+            OUTPUT_PATH = 'docs'
+        save and close file
+    return to console
+    run python and live reload
+        > pelican
+        > invoke livereload
+        close browser tab
+        > {ctrl + c} to exit active console process
+    create a github repo for this website
+        > gh repo create
+        ? What would you like to do? [Create a new repository on GitHub from scratch]
+        ? Repository Name:  {Repo_name}
+        ? Description:  {Repo_description}
+        ? Visibility [Public]
+        ? Would you like to add a .gitignore? [No]
+        ? Would you like to add a license? [No]
+        ? This will create "Repo_name" as a public repository on GitHub. Continue? [Yes]
+        ✓ Created repository Github_Id/Repo_name on GitHub
+        ? Clone the new repository locally? [No]
+    add all changes to git
+        > git add .
+        #ignore warnings#
+            warning: LF will be replaced by CRLF in ...
+            The file will have its original line endings in your working directory
+    stage all the changes to make ready for push to Repo
+        > git commit -m "{comments about this push and changes included}"
+    connect git to Repo on Github
+        > git remote add origin git@github.com:{Github_User_Id}/{Repo_name}.git
+    create branch if first time or if needed
+        > git branch -M main
+    push to Github
+        >git push -u origin main
+        enter passphrase if required
+    switch to browser and go to your Github account.
+        direct url should be https://github.com/{Github_User_Id}/{Repo_name}
+        go to settings tab
+        go to pages settings
+        select branch : main
+        select folder : docs
+        click save
+    Wait a moment for sync
+    click on the above link to your new webpage on Github!
