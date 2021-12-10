@@ -11,11 +11,11 @@
 1. open console
 2. create directory for project 
 
-` mkdir 'folder_name' `
+> mkdir 'folder_name' 
 
 3. open directory in console 
 
- cd 'folder_name' 
+> cd 'folder_name' 
 
 4. start tracking this directory 
 
